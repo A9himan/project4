@@ -1,6 +1,7 @@
 import random
 import string
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from flask import Flask, render_template, request, session, redirect, url_for
 from flask_socketio import SocketIO, join_room, leave_room, emit
@@ -11,6 +12,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")
 
 rooms = {}
 MAX_HISTORY = 100
+IST = ZoneInfo("Asia/Kolkata")
 
 
 def generate_room_code():
@@ -133,7 +135,7 @@ def on_disconnect():
 
 
 def _now():
-    return datetime.now().strftime("%H:%M")
+    return datetime.now(IST).strftime("%H:%M")
 
 
 if __name__ == "__main__":
