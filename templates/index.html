@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequency — free real-time chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="landing">
+  <div class="dial-bg" aria-hidden="true"></div>
+
+  <main class="landing-shell">
+    <div class="brand">
+      <span class="brand-mark">◉</span>
+      <span class="brand-name">FREQUENCY</span>
+    </div>
+
+    <h1 class="hero-line">
+      Pick a channel.<br />Someone's listening.
+    </h1>
+    <p class="hero-sub">
+      No accounts, no history saved to a server past the session, nothing to install.
+      Open a new channel or tune into one someone shared with you.
+    </p>
+
+    <div class="console">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="create" type="button">Open a channel</button>
+        <button class="tab" data-tab="join" type="button">Tune in</button>
+      </div>
+
+      <form class="panel active" id="panel-create" action="/create" method="POST">
+        <label class="field-label" for="create-username">Your name on air</label>
+        <input class="field" id="create-username" name="username" type="text" placeholder="e.g. Sam" maxlength="20" required autocomplete="off" />
+        <button class="btn-primary" type="submit">Generate channel &amp; go live →</button>
+      </form>
+
+      <form class="panel" id="panel-join" action="/join" method="POST">
+        <label class="field-label" for="join-username">Your name on air</label>
+        <input class="field" id="join-username" name="username" type="text" placeholder="e.g. Sam" maxlength="20" required autocomplete="off" />
+
+        <label class="field-label" for="join-code">Channel code</label>
+        <input class="field field-mono" id="join-code" name="code" type="text" placeholder="X7K3P" maxlength="5" required autocomplete="off" style="text-transform:uppercase" />
+
+        <button class="btn-primary" type="submit">Tune in →</button>
+      </form>
+    </div>
+
+    <p class="foot-note">Share your channel code with one other person to start talking. Rooms are free, in-memory, and disappear when everyone leaves.</p>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/landing.js') }}"></script>
+</body>
+</html>

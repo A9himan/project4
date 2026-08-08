@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Channel {{ code }} — Frequency</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body class="room">
+  <header class="room-header">
+    <a class="brand brand-sm" href="/">
+      <span class="brand-mark">◉</span>
+      <span class="brand-name">FREQUENCY</span>
+    </a>
+
+    <div class="channel-info">
+      <span class="channel-label">CHANNEL</span>
+      <span class="channel-code" id="channel-code">{{ code }}</span>
+      <button class="copy-btn" id="copy-btn" type="button" title="Copy channel code">copy</button>
+    </div>
+
+    <div class="signal" id="signal-indicator" aria-hidden="true">
+      <span class="bar b1"></span>
+      <span class="bar b2"></span>
+      <span class="bar b3"></span>
+      <span class="bar b4"></span>
+    </div>
+  </header>
+
+  <div class="room-body">
+    <aside class="listeners-panel">
+      <h2 class="panel-title">On this channel</h2>
+      <ul class="listener-list" id="listener-list"></ul>
+    </aside>
+
+    <main class="log-panel">
+      <div class="log" id="log"></div>
+
+      <div class="typing-row" id="typing-row"></div>
+
+      <form class="composer" id="composer" autocomplete="off">
+        <input
+          class="composer-input"
+          id="message-input"
+          type="text"
+          placeholder="Transmit a message…"
+          maxlength="2000"
+        />
+        <button class="btn-send" type="submit" title="Send">SEND</button>
+      </form>
+    </main>
+  </div>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    window.ROOM_CODE = {{ code | tojson }};
+    window.USERNAME = {{ username | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/room.js') }}"></script>
+</body>
+</html>
